@@ -15,6 +15,7 @@ var config = {
 };
 
 firebase.initializeApp(config);
+database = firebase.database();
 
 // Capture Button Click
 $("#formSubmit").on("click", function(event) {
@@ -23,15 +24,14 @@ $("#formSubmit").on("click", function(event) {
     // Grabbed values from text boxes
     trainName = $("#inputTrainName").val().trim();
     destination = $("#inputDestination").val().trim();
-    initialTime = $("#inputInitTimet").val().trim();
+    initialTime = $("#inputInitTime").val().trim();
     runFrequency = $("#inputFrequency").val().trim();
 
     // Code for handling the push
     database.ref().push({
-        name: name,
-        email: email,
-        age: age,
-        comment: comment,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
+        name: trainName,
+        destination: destination,
+        initialTime: initialTime,
+        runFrequency: runFrequency
     });
 });
