@@ -3,6 +3,7 @@ var trainName = "";
 var destination = "";
 var initialTime = "";
 var runFrequency = 0;
+var trainList = [];
 
 // Initialize Firebase
 var config = {
@@ -17,6 +18,18 @@ var config = {
 firebase.initializeApp(config);
 database = firebase.database();
 
+// clear form function
+function clearForm() {
+    $("#inputTrainName").val("");
+    $("#inputDestination").val("");
+    $("#inputInitTime").val("");
+    $("#inputFrequency").val("");
+}
+
+function clearTable() {
+    $("#listBody").empty();
+}
+
 // Capture Button Click
 $("#formSubmit").on("click", function(event) {
     event.preventDefault();
@@ -24,7 +37,7 @@ $("#formSubmit").on("click", function(event) {
     // Grabbed values from text boxes
     trainName = $("#inputTrainName").val().trim();
     destination = $("#inputDestination").val().trim();
-    initialTime = $("#inputInitTime").val().trim();
+    initialTime = moment($("#inputInitTime").val().trim()).format("k:mm");
     runFrequency = $("#inputFrequency").val().trim();
 
     // Code for handling the push
@@ -34,4 +47,40 @@ $("#formSubmit").on("click", function(event) {
         initialTime: initialTime,
         runFrequency: runFrequency
     });
+
+    clearForm();
 });
+
+database.ref().on('child_added', function(snapshot) {
+    trainList.push(snapshot.val());
+    fillTrainSched(trainList);
+});
+
+function fillTrainSched(train) {
+    clearTable();
+    console.log(train);
+
+    for (var i = 0; i < train.length; i++) {
+        var trainRow = $("<tr>");
+        var trainListName = $("<td>");
+        var trainListDest = $("<td>");
+        var trainListRunFreq = $("<td>");
+        var trainListNextArrival = $("<td>");
+        var trainListMinAway = $("<td>");
+
+        trainListName.text(train[i].name);
+        trainListDest.text(train[i].destination);
+        trainListRunFreq.text(train[i].runFrequency);
+        trainListNextArrival.text("temp");
+        trainListMinAway.text("temp");
+
+        trainRow.append(trainListName);
+        trainRow.append(trainListDest);
+        trainRow.append(trainListRunFreq);
+        trainRow.append(trainListNextArrival);
+        trainRow.append(trainListMinAway);
+
+        $("#listBody").append(trainRow);
+
+    }
+}

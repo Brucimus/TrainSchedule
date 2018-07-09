@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputInitTime">Initial Time</label>
-                        <input type="text" class="form-control" id="inputInitTime" placeholder="12:00">
+                        <input type="datetime-local" class="form-control" id="inputInitTime" placeholder="12:00">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputFrequency">Frequency (min)</label>
@@ -56,10 +56,6 @@
         </div>
 
         <!--Schedule-->
-        <div id="scheduleLister">
-
-        </div>
-            <!--Current Employees Field-->
         <div class="card" style="width: 960px; margin-left:auto; margin-right: auto">
             <div class="card-body">
                 <div>
@@ -75,7 +71,7 @@
                             <th scope="col">Minutes Away</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="listBody"></tbody>
                 </table>
             </div>
         </div>
