@@ -37,8 +37,9 @@ $("#formSubmit").on("click", function(event) {
     // Grabbed values from text boxes
     trainName = $("#inputTrainName").val().trim();
     destination = $("#inputDestination").val().trim();
-    initialTime = moment($("#inputInitTime").val().trim()).format("k:mm");
+    initialTime = moment($("#inputInitTime").val().trim(),['h:m A']).format('HH:mm');
     runFrequency = $("#inputFrequency").val().trim();
+    // debugger;
 
     // Code for handling the push
     database.ref().push({
