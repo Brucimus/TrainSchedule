@@ -37,9 +37,8 @@ $("#formSubmit").on("click", function(event) {
     // Grabbed values from text boxes
     trainName = $("#inputTrainName").val().trim();
     destination = $("#inputDestination").val().trim();
-    initialTime = moment($("#inputInitTime").val().trim(),['h:m A']).format('HH:mm');
+    initialTime = moment($("#inputInitTime").val().trim(),['h:m A']).toISOString();
     runFrequency = $("#inputFrequency").val().trim();
-    // debugger;
 
     // Code for handling the push
     database.ref().push({
@@ -69,6 +68,13 @@ function fillTrainSched(train) {
         var trainListNextArrival = $("<td>");
         var trainListMinAway = $("<td>");
 
+        // var nowNow = moment().format('X');
+        // var nowNow2 = moment()
+        // var timeDiff = moment(moment(nowNow, "HH:mm").diff(moment(train[i].initialTime, "HH:mm"))).format("mm");
+        // var timeDiff3 = nowNow.diff(moment(train[i].initialTime),"hours");
+        // var timeDiff2 = moment.duration(moment(nowNow).diff(moment(train[i].initialTime)));
+
+        debugger;
         trainListName.text(train[i].name);
         trainListDest.text(train[i].destination);
         trainListRunFreq.text(train[i].runFrequency);
