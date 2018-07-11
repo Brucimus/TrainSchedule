@@ -68,18 +68,24 @@ function fillTrainSched(train) {
         var trainListNextArrival = $("<td>");
         var trainListMinAway = $("<td>");
 
+        //calculate when the next run time will occur
+        var diffTime = moment().diff(moment(train[i].initialTime),"minutes");
+        var timesRun = Math.ceil(diffTime/train[i].runFrequency);
+        var nextTime = moment(train[i].initialTime).add(timesRun*train[i].runFrequency,"minutes");
+        var timeTillNext = moment(nextTime).diff(moment(), "minutes");
+
         // var nowNow = moment().format('X');
         // var nowNow2 = moment()
         // var timeDiff = moment(moment(nowNow, "HH:mm").diff(moment(train[i].initialTime, "HH:mm"))).format("mm");
         // var timeDiff3 = nowNow.diff(moment(train[i].initialTime),"hours");
         // var timeDiff2 = moment.duration(moment(nowNow).diff(moment(train[i].initialTime)));
 
-        debugger;
+        // debugger;
         trainListName.text(train[i].name);
         trainListDest.text(train[i].destination);
         trainListRunFreq.text(train[i].runFrequency);
-        trainListNextArrival.text("temp");
-        trainListMinAway.text("temp");
+        trainListNextArrival.text(nextTime.format("HH:mm"));
+        trainListMinAway.text(timeTillNext);
 
         trainRow.append(trainListName);
         trainRow.append(trainListDest);
