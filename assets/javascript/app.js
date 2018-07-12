@@ -18,7 +18,7 @@ var config = {
 firebase.initializeApp(config);
 database = firebase.database();
 
-// clear form function
+//Clear Form Function
 function clearForm() {
     $("#inputTrainName").val("");
     $("#inputDestination").val("");
@@ -26,6 +26,7 @@ function clearForm() {
     $("#inputFrequency").val("");
 }
 
+//Clear Table Function
 function clearTable() {
     $("#listBody").empty();
 }
@@ -48,14 +49,17 @@ $("#formSubmit").on("click", function(event) {
         runFrequency: runFrequency
     });
 
+    //Empty Form
     clearForm();
 });
 
+//Update Local Train List and Displayed List Upon Adding New Train
 database.ref().on('child_added', function(snapshot) {
     trainList.push(snapshot.val());
     fillTrainSched(trainList);
 });
 
+//Display Train Schedule Function
 function fillTrainSched(train) {
     clearTable();
     console.log(train);
@@ -74,25 +78,21 @@ function fillTrainSched(train) {
         var nextTime = moment(train[i].initialTime).add(timesRun*train[i].runFrequency,"minutes");
         var timeTillNext = moment(nextTime).diff(moment(), "minutes");
 
-        // var nowNow = moment().format('X');
-        // var nowNow2 = moment()
-        // var timeDiff = moment(moment(nowNow, "HH:mm").diff(moment(train[i].initialTime, "HH:mm"))).format("mm");
-        // var timeDiff3 = nowNow.diff(moment(train[i].initialTime),"hours");
-        // var timeDiff2 = moment.duration(moment(nowNow).diff(moment(train[i].initialTime)));
-
-        // debugger;
+        //Get Train Information
         trainListName.text(train[i].name);
         trainListDest.text(train[i].destination);
         trainListRunFreq.text(train[i].runFrequency);
         trainListNextArrival.text(nextTime.format("HH:mm"));
         trainListMinAway.text(timeTillNext);
 
+        //Append Train Information to Table
         trainRow.append(trainListName);
         trainRow.append(trainListDest);
         trainRow.append(trainListRunFreq);
         trainRow.append(trainListNextArrival);
         trainRow.append(trainListMinAway);
 
+        //Display Train Schedule
         $("#listBody").append(trainRow);
 
     }

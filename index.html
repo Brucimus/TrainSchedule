@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+
+        <!--Font Import-->
+        <link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas:400,700" rel="stylesheet">
         
         <!--css links-->
         <link rel="stylesheet" href="assets/css/reset.css">
@@ -20,46 +23,46 @@
     </head>
     <body>
         <!--Jumbotron-->
-        <div class="jumbotron" style="width: 960px; text-align: center; margin: 0 auto;">
+        <div class="jumbotron">
             <h1 class="display-4">Train Schedule</h1>
-            <p class="lead">aka. Rock, Paper, Scissors</p>
+            <p class="lead">Platform 9 3/4</p>
         </div>
 
         <!--Schedule Maker-->
-        <div class="card">
-            <div class="card-header">
+        <div class="card" id="inputForm">
+            <div class="card-header sectionHead">
                 Add Train
             </div>
             <div class="card-body">
                 <form>
-                    <div class="form-row">
-                        <div class="form-group">
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-6">
                             <label for="inputTrainName">Train Name</label>
                             <input type="text" class="form-control" id="inputTrainName" placeholder="Train Name">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="inputDestination">Destination</label>
                             <input type="text" class="form-control" id="inputDestination" placeholder="Destination">
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="inputInitTime">Initial Time</label>
                         <input type="time" class="form-control" id="inputInitTime" placeholder="12:00">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="inputFrequency">Frequency (min)</label>
                         <input type="number" class="form-control" id="inputFrequency" placeholder="10">
                     </div>
-                    <button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="formSubmit" class="btn btn-primary">Mischief Managed</button>
                 </form>
             </div>
         </div>
 
         <!--Schedule-->
-        <div class="card" style="width: 960px; margin-left:auto; margin-right: auto">
+        <div id="scheduleDisplay" class="card">
             <div class="card-body">
-                <div>
-                    <h4 style="text-align: center">Current Train Schedule</h4>
+                <div class="sectionHead">
+                    <h4>Current Train Schedule</h4>
                 </div>
                 <table class="table">
                     <thead>
